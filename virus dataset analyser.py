@@ -3,6 +3,7 @@ Virus dataset analyser
 """
 from tkinter import Tk, Menu, filedialog, simpledialog
 from tkinter import messagebox as msg
+import pandas as pd
 def helpmenu():
     """ help menu funciton """
 def aboutmenu():
@@ -37,7 +38,11 @@ class Virus_Dataset_Analyser():
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
     def infcountries(self):
-        pass
+        if self.filename == "":
+            msg.showerror("ERROR", "NO FILE IMPORTED")
+        else:
+            msg.showinfo("Infected countries", "There are " + str(len(self.df['Country/Region'])) +" infected coutries. \n"+str(list(self.df['Country/Region'])))
+
     def casesbycountry(self):
         pass
     def insert_csv(self):
