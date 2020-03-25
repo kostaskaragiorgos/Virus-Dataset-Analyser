@@ -25,6 +25,16 @@
 
 # Dependencies
 
+<ul>
+    <li> matplotlib (conda install -c conda-forge matplotlib) </li>
+    <li> second way to install matplotlib (pip install matplotlib) </li>
+    <li> numpy (conda install -c anaconda numpy) </li>
+    <li> second way to install numpy(pip install numpy) </li>
+    <li> pandas (conda install -c anaconda pandas) </li>
+    <li> second way to install pandas ( pip install pandas) </li>
+    <li> radon (conda install -c conda-forge radon) </li>
+    <li> second way to install radon (pip install radon) </li>
+</ul>
 
 
 # Current_Version
