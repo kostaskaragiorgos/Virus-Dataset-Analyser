@@ -10,6 +10,7 @@ def helpmenu():
     """ help menu funciton """
 def aboutmenu():
     """ about menu function """
+    msg.showinfo("About", "Version 1.0")
 class Virus_Dataset_Analyser():
     """Virus_Dataset_Analysers class"""
     def __init__(self, master):
@@ -39,23 +40,25 @@ class Virus_Dataset_Analyser():
         self.master.bind('<Control-t>', lambda event: self.casesbycountry())
         self.master.bind('<Control-o>', lambda event: self.insert_csv())
         self.master.bind('<Alt-F4>', lambda event: self.exitmenu())
-        self.master.bind('<Control-s>',lambda event: self.infcountries())
+        self.master.bind('<Control-s>', lambda event: self.infcountries())
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
     def infcountries(self):
+        """ shows the number and the names of the infected countries """
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             msg.showinfo("Infected countries", "There are " + str(len(self.df['Country/Region'])) +" infected coutries. \n"+str(list(self.df['Country/Region'])))
 
     def casesbycountry(self):
+        """ plots an Deaths/Confirmed/Recovered cases graph of a chosen country"""
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
-            self.asked_country = simpledialog.askstring("Country","Insert the name of the country")
-            while self.asked_country == None or not (self.df['Country/Region'].str.contains(str(self.asked_country)).any()):
-                self.asked_country = simpledialog.askstring("Country","Insert the name of the country")
-            data = [self.df[self.df['Country/Region']==str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region']==str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region']==str(self.asked_country)]['Recovered'].sum()]
+            self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
+            while self.asked_country is None or not (self.df['Country/Region'].str.contains(str(self.asked_country)).any()):
+                self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
+            data = [self.df[self.df['Country/Region'] == str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Recovered'].sum()]
             plt.bar(np.arange(3), data)
             plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))
             plt.show() 
@@ -68,7 +71,7 @@ class Virus_Dataset_Analyser():
                 self.df = pd.read_csv(self.filename)
                 if all([item in self.df.columns for item in ['Province/State', 'Country/Region', 'Lat', 'Long', 'Date', 'Confirmed', 'Deaths', 'Recovered']]):
                     self.df = self.df.drop_duplicates(subset='Country/Region', keep='last')
-                    self.df['Country/Region']= self.df['Country/Region'].astype("string")
+                    self.df['Country/Region'] = self.df['Country/Region'].astype("string")
                     msg.showinfo("SUCCESS", "CSV FILE ADDED SUCCESSFULLY")
                 else:
                     self.filename = ""
