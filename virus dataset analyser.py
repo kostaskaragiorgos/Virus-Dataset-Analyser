@@ -4,6 +4,8 @@ Virus dataset analyser
 from tkinter import Tk, Menu, filedialog, simpledialog
 from tkinter import messagebox as msg
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 def helpmenu():
     """ help menu funciton """
 def aboutmenu():
@@ -47,6 +49,10 @@ class Virus_Dataset_Analyser():
         self.asked_country = simpledialog.askstring("Country","Insert the name of the country")
         while self.asked_country == None or not (self.df['Country/Region'].str.contains(str(self.asked_country)).any()):
             self.asked_country = simpledialog.askstring("Country","Insert the name of the country")
+        data = [self.df[self.df['Country/Region']==str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region']==str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region']==str(self.asked_country)]['Recovered'].sum()]
+        plt.bar(np.arange(3), data)
+        plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))
+        plt.show() 
     def insert_csv(self):
         """ insert csv function """
         if self.filename == "":   # csv file stracture : Province/State,Country/Region,Lat,Long,Date,Confirmed,Deaths,Recovered
