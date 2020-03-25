@@ -46,13 +46,16 @@ class Virus_Dataset_Analyser():
             msg.showinfo("Infected countries", "There are " + str(len(self.df['Country/Region'])) +" infected coutries. \n"+str(list(self.df['Country/Region'])))
 
     def casesbycountry(self):
-        self.asked_country = simpledialog.askstring("Country","Insert the name of the country")
-        while self.asked_country == None or not (self.df['Country/Region'].str.contains(str(self.asked_country)).any()):
+        if self.filename == "":
+            msg.showerror("ERROR", "NO FILE IMPORTED")
+        else:
             self.asked_country = simpledialog.askstring("Country","Insert the name of the country")
-        data = [self.df[self.df['Country/Region']==str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region']==str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region']==str(self.asked_country)]['Recovered'].sum()]
-        plt.bar(np.arange(3), data)
-        plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))
-        plt.show() 
+            while self.asked_country == None or not (self.df['Country/Region'].str.contains(str(self.asked_country)).any()):
+                self.asked_country = simpledialog.askstring("Country","Insert the name of the country")
+            data = [self.df[self.df['Country/Region']==str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region']==str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region']==str(self.asked_country)]['Recovered'].sum()]
+            plt.bar(np.arange(3), data)
+            plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))
+            plt.show() 
     def insert_csv(self):
         """ insert csv function """
         if self.filename == "":   # csv file stracture : Province/State,Country/Region,Lat,Long,Date,Confirmed,Deaths,Recovered
