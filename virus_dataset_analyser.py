@@ -22,6 +22,7 @@ class Virus_Dataset_Analyser():
         self.menu = Menu(self.master)
         self.file_menu = Menu(self.menu, tearoff=0)
         self.file_menu.add_command(label="Insert a csv", accelerator='Ctrl+O', command=self.insert_csv)
+        self.file_menu.add_command(label="Close file", accelerator='Ctrl+F4', command=self.closefile)
         self.file_menu.add_command(label="Exit", accelerator='Alt+F4', command=self.exitmenu)
         self.menu.add_cascade(label="File", menu=self.file_menu)
         self.show_menu = Menu(self.menu, tearoff=0)
@@ -39,10 +40,13 @@ class Virus_Dataset_Analyser():
         self.master.config(menu=self.menu)
         self.master.bind('<Control-t>', lambda event: self.casesbycountry())
         self.master.bind('<Control-o>', lambda event: self.insert_csv())
+        self.master.bind('<Control-F4>', lambda event: self.closefile())
         self.master.bind('<Alt-F4>', lambda event: self.exitmenu())
         self.master.bind('<Control-s>', lambda event: self.infcountries())
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
+    def closefile(self):
+        pass
     def infcountries(self):
         """ shows the number and the names of the infected countries """
         if self.filename == "":
