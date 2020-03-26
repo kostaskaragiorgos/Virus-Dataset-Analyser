@@ -46,7 +46,11 @@ class Virus_Dataset_Analyser():
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
     def closefile(self):
-        pass
+        if self.filename == "":
+            msg.showerror("ERROR","NO FILE IMPORTED")
+        else:
+            self.filename = ""
+            msg.showinfo("SUCCESS", "CSV FILE SUCCESSFULLY CLOSED")
     def infcountries(self):
         """ shows the number and the names of the infected countries """
         if self.filename == "":
