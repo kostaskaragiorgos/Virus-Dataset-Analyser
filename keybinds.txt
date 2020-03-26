@@ -1,0 +1,21 @@
+File menu
+===================
+Insert a csv Ctrl+O
+Exit Alt+F4
+============
+Show menu
+============
+Show infected countries Ctrl + S
+=================================
+Graphs menu
+===========
+Show cases by country Ctrl + T
+==============================
+About menu
+==============
+About Ctrl + I
+==============
+Help menu
+==============
+Help Ctrl + F1
+==============
