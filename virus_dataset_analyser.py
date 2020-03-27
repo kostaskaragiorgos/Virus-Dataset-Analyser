@@ -27,6 +27,8 @@ class Virus_Dataset_Analyser():
         self.menu.add_cascade(label="File", menu=self.file_menu)
         self.show_menu = Menu(self.menu, tearoff=0)
         self.show_menu.add_command(label="Show infected countries", accelerator='Ctrl+S', command=self.infcountries)
+        self.show_menu.add_command(label="Show max")
+        self.show_menu.add_command(label="Show min")
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
