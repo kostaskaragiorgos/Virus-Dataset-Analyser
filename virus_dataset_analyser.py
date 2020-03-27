@@ -27,7 +27,7 @@ class Virus_Dataset_Analyser():
         self.menu.add_cascade(label="File", menu=self.file_menu)
         self.show_menu = Menu(self.menu, tearoff=0)
         self.show_menu.add_command(label="Show infected countries", accelerator='Ctrl+S', command=self.infcountries)
-        self.show_menu.add_command(label="Show max")
+        self.show_menu.add_command(label="Show max", command=self.maxcases)
         self.show_menu.add_command(label="Show min")
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
@@ -47,6 +47,12 @@ class Virus_Dataset_Analyser():
         self.master.bind('<Control-s>', lambda event: self.infcountries())
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
+    
+    def maxcases(self):
+        if self.filename == "":
+            msg.showerror("ERROR","NO FILE IMPORTED")
+        else:
+            msg.showinfo("Max", "Most confirmed cases:" + str(self.df[self.df.Confirmed == self.df.Confirmed.max()]['Country/Region'].to_string())+"\nMost Deaths cases:" + str(self.df[self.df.Deaths == self.df.Deaths.max()]['Country/Region'].to_string())+"\nMost Recovered cases:" + str(self.df[self.df.Recovered == self.df.Recovered.max()]['Country/Region'].to_string()))
     def closefile(self):
         if self.filename == "":
             msg.showerror("ERROR","NO FILE IMPORTED")
