@@ -48,11 +48,13 @@ class Virus_Dataset_Analyser():
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
     def mincases(self):
+        """ shows name the least confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
             msg.showerror("ERROR","NO FILE IMPORTED")
         else:
             msg.showinfo("Min", "Least confirmed cases:" + str(self.df[self.df.Confirmed == self.df.Confirmed.min()]['Country/Region'].to_string())+"\nLeast Deaths cases:" + str(self.df[self.df.Deaths == self.df.Deaths.min()]['Country/Region'].to_string())+"\nLeast Recovered cases:" + str(self.df[self.df.Recovered == self.df.Recovered.min()]['Country/Region'].to_string()))
     def maxcases(self):
+        """ shows name the most confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
             msg.showerror("ERROR","NO FILE IMPORTED")
         else:
