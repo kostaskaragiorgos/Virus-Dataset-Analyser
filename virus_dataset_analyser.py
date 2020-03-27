@@ -11,8 +11,8 @@ def helpmenu():
 def aboutmenu():
     """ about menu function """
     msg.showinfo("About", "Version 1.0")
-class Virus_Dataset_Analyser():
-    """Virus_Dataset_Analysers class"""
+class VirusDatasetAnalyser():
+    """VirusDatasetAnalysers class"""
     def __init__(self, master):
         self.master = master
         self.master.title("Virus_Dataset_Analyser")
@@ -50,18 +50,19 @@ class Virus_Dataset_Analyser():
     def mincases(self):
         """ shows name the least confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
-            msg.showerror("ERROR","NO FILE IMPORTED")
+            msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             msg.showinfo("Min", "Least confirmed cases:" + str(self.df[self.df.Confirmed == self.df.Confirmed.min()]['Country/Region'].to_string())+"\nLeast Deaths cases:" + str(self.df[self.df.Deaths == self.df.Deaths.min()]['Country/Region'].to_string())+"\nLeast Recovered cases:" + str(self.df[self.df.Recovered == self.df.Recovered.min()]['Country/Region'].to_string()))
     def maxcases(self):
         """ shows name the most confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
-            msg.showerror("ERROR","NO FILE IMPORTED")
+            msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             msg.showinfo("Max", "Most confirmed cases:" + str(self.df[self.df.Confirmed == self.df.Confirmed.max()]['Country/Region'].to_string())+"\nMost Deaths cases:" + str(self.df[self.df.Deaths == self.df.Deaths.max()]['Country/Region'].to_string())+"\nMost Recovered cases:" + str(self.df[self.df.Recovered == self.df.Recovered.max()]['Country/Region'].to_string()))
     def closefile(self):
+        """ closes the csv file """
         if self.filename == "":
-            msg.showerror("ERROR","NO FILE IMPORTED")
+            msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             self.filename = ""
             msg.showinfo("SUCCESS", "CSV FILE SUCCESSFULLY CLOSED")
@@ -78,7 +79,7 @@ class Virus_Dataset_Analyser():
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
-            while self.asked_country is None or not (self.df['Country/Region'].str.contains(str(self.asked_country)).any()):
+            while self.asked_country is None or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
                 self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
             data = [self.df[self.df['Country/Region'] == str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Recovered'].sum()]
             plt.bar(np.arange(3), data)
@@ -88,7 +89,7 @@ class Virus_Dataset_Analyser():
         """ insert csv function """
         if self.filename == "":   # csv file stracture : Province/State,Country/Region,Lat,Long,Date,Confirmed,Deaths,Recovered
             self.filename = filedialog.askopenfilename(initialdir="/", title="Select csv file",
-                                                        filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+                                                       filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
             if ".csv" in self.filename:
                 self.df = pd.read_csv(self.filename)
                 if all([item in self.df.columns for item in ['Province/State', 'Country/Region', 'Lat', 'Long', 'Date', 'Confirmed', 'Deaths', 'Recovered']]):
@@ -110,7 +111,7 @@ class Virus_Dataset_Analyser():
 def main():
     """ main function """
     root = Tk()
-    Virus_Dataset_Analyser(root)
+    VirusDatasetAnalyser(root)
     root.mainloop()
 if __name__ == '__main__':
     main()
