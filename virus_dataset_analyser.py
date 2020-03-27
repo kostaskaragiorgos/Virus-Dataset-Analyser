@@ -28,7 +28,7 @@ class Virus_Dataset_Analyser():
         self.show_menu = Menu(self.menu, tearoff=0)
         self.show_menu.add_command(label="Show infected countries", accelerator='Ctrl+S', command=self.infcountries)
         self.show_menu.add_command(label="Show max", command=self.maxcases)
-        self.show_menu.add_command(label="Show min")
+        self.show_menu.add_command(label="Show min", command=self.mincases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
@@ -47,7 +47,11 @@ class Virus_Dataset_Analyser():
         self.master.bind('<Control-s>', lambda event: self.infcountries())
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
-    
+    def mincases(self):
+        if self.filename == "":
+            msg.showerror("ERROR","NO FILE IMPORTED")
+        else:
+            msg.showinfo("Min", "Least confirmed cases:" + str(self.df[self.df.Confirmed == self.df.Confirmed.min()]['Country/Region'].to_string())+"\nLeast Deaths cases:" + str(self.df[self.df.Deaths == self.df.Deaths.min()]['Country/Region'].to_string())+"\nLeast Recovered cases:" + str(self.df[self.df.Recovered == self.df.Recovered.min()]['Country/Region'].to_string()))
     def maxcases(self):
         if self.filename == "":
             msg.showerror("ERROR","NO FILE IMPORTED")
