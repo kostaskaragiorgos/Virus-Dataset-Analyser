@@ -72,7 +72,6 @@ class VirusDatasetAnalyser():
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             msg.showinfo("Infected countries", "There are " + str(len(self.df['Country/Region'])) +" infected coutries. \n"+str(list(self.df['Country/Region'])))
-
     def casesbycountry(self):
         """ plots an Deaths/Confirmed/Recovered cases graph of a chosen country"""
         if self.filename == "":
