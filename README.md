@@ -53,8 +53,12 @@
 
 <ul>
   <li> Insert a csv Ctrl+O </li>
+  <li> Close file Ctrl+F4 </li>
   <li> Exit Alt+F4 </li>
   <li> Show infected countries Ctrl+S </li>
+  <li> Show most infected Alt+M </li>
+  <li> Show least infected Ctrl+M </li>
+  <li> Show infected difference </li>
   <li> show cases by country Ctrl+T </li>
   <li> About Ctrl+I </li>
   <li> Help Ctrl+F1 </li>
