@@ -54,8 +54,9 @@ class VirusDatasetAnalyser():
         if self.filename == "":
             msg.showerror("ERROR","NO FILE IMPORTED")
         else:
-            dataf = pd.read_csv(self.filename)
-            print(len(dataf))
+            self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
+            while self.asked_country is None or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
+                self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
     def mincases(self):
         """ shows name the least confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
