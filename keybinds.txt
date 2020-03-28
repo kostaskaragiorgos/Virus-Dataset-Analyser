@@ -1,11 +1,15 @@
 File menu
 ===================
 Insert a csv Ctrl+O
+Close file Ctrl+F4
 Exit Alt+F4
 ============
 Show menu
-============
+================================
 Show infected countries Ctrl + S
+Show most infected Alt + M
+Show least infected Ctrl + M
+Show infected difference
 =================================
 Graphs menu
 ===========
