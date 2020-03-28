@@ -29,7 +29,7 @@ class VirusDatasetAnalyser():
         self.show_menu.add_command(label="Show infected countries", accelerator='Ctrl+S', command=self.infcountries)
         self.show_menu.add_command(label="Show most infected", accelerator='Alt+M', command=self.maxcases)
         self.show_menu.add_command(label="Show least infected", accelerator='Ctrl+M', command=self.mincases)
-        self.show_menu.add_command(label="Show time difference", command=self.showtimediff)
+        self.show_menu.add_command(label="Show infected difference", command=self.showinfdiff)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
@@ -50,7 +50,7 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-s>', lambda event: self.infcountries())
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
-    def showtimediff(self):
+    def showinfdiff(self):
         if self.filename == "":
             msg.showerror("ERROR","NO FILE IMPORTED")
         else:
