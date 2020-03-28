@@ -19,7 +19,10 @@
 # Files
 
 <ul>
+  <li> keybinds.txt(keybinds file) </li>
   <li> virus_dataset_analyser.py (.py file) </li>
+  <li> virus_dataset_analyser.png (version file) </li>
+  <li> radon *(radon images) </li>
 </ul>
 
 
