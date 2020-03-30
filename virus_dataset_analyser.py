@@ -3,6 +3,7 @@ Virus dataset analyser
 """
 from tkinter import Tk, Menu, filedialog, simpledialog
 from tkinter import messagebox as msg
+import datetime
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -63,9 +64,9 @@ class VirusDatasetAnalyser():
             self.from_day = simpledialog.askinteger("From Day","Enter the from day", parent = self.master, minvalue=1, maxvalue=31)
             while self.from_day is None:
                 self.from_day = simpledialog.askinteger("From Day","Enter the from day", parent = self.master, minvalue=1, maxvalue=31)
-            self.to_month = simpledialog.askinteger("From Month","Enter the from month", parent = self.master, minvalue=self.from_month, maxvalue=3)
+            self.to_month = simpledialog.askinteger("To Month","Enter the to month", parent = self.master, minvalue=self.from_month, maxvalue=3)
             while self.to_month is None:
-                self.to_month = simpledialog.askinteger("From Month","Enter the from month", parent = self.master, minvalue=self.from_month, maxvalue=3)
+                self.to_month = simpledialog.askinteger("To Month","Enter the to month", parent = self.master, minvalue=self.from_month, maxvalue=3)
             if self.to_month == self.from_month:
                 self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=self.from_day, maxvalue=31)
                 while self.to_day is None:
@@ -74,6 +75,8 @@ class VirusDatasetAnalyser():
                 self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
                 while self.to_day is None:
                     self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
+            print(datetime.datetime(2020,self.to_month,self.to_day).strftime("%x"))
+            print(self.df[self.df['Date']==datetime.datetime(2020,self.to_month,self.to_day).strftime("%x")])
 
             
 
