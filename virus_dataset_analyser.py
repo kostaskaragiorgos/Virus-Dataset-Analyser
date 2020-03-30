@@ -57,6 +57,26 @@ class VirusDatasetAnalyser():
             self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
             while self.asked_country is None or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
                 self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
+            self.from_month = simpledialog.askinteger("From Month","Enter the from month", parent = self.master, minvalue=1, maxvalue=3)
+            while self.from_month is None:
+                self.from_month = simpledialog.askinteger("From Month","Enter the from month", parent = self.master, minvalue=1, maxvalue=3)
+            self.from_day = simpledialog.askinteger("From Day","Enter the from day", parent = self.master, minvalue=1, maxvalue=31)
+            while self.from_day is None:
+                self.from_day = simpledialog.askinteger("From Day","Enter the from day", parent = self.master, minvalue=1, maxvalue=31)
+            self.to_month = simpledialog.askinteger("From Month","Enter the from month", parent = self.master, minvalue=self.from_month, maxvalue=3)
+            while self.to_month is None:
+                self.to_month = simpledialog.askinteger("From Month","Enter the from month", parent = self.master, minvalue=self.from_month, maxvalue=3)
+            if self.to_month == self.from_month:
+                self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=self.from_day, maxvalue=31)
+                while self.to_day is None:
+                    self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=self.from_day, maxvalue=31)
+            else:
+                self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
+                while self.to_day is None:
+                    self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
+
+            
+
     def mincases(self):
         """ shows name the least confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
