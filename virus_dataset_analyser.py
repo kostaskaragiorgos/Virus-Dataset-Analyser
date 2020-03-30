@@ -55,6 +55,9 @@ class VirusDatasetAnalyser():
         if self.filename == "":
             msg.showerror("ERROR","NO FILE IMPORTED")
         else:
+            df = pd.read_csv(self.filename)
+            df['Date']= df['Date'].astype("string")
+
             self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
             while self.asked_country is None or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
                 self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
@@ -75,11 +78,9 @@ class VirusDatasetAnalyser():
                 self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
                 while self.to_day is None:
                     self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
-            print(datetime.datetime(2020,self.to_month,self.to_day).strftime("%x"))
-            print(self.df[self.df['Date']==datetime.datetime(2020,self.to_month,self.to_day).strftime("%x")])
-
             
-
+            #print(datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))
+            print(df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))])
     def mincases(self):
         """ shows name the least confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
