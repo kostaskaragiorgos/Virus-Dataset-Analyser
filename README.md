@@ -61,7 +61,7 @@
   <li> Show infected countries Ctrl+S </li>
   <li> Show most infected Alt+M </li>
   <li> Show least infected Ctrl+M </li>
-  <li> Show infected difference </li>
+  <li> Show infected difference Alt+S</li>
   <li> show cases by country Ctrl+T </li>
   <li> About Ctrl+I </li>
   <li> Help Ctrl+F1 </li>

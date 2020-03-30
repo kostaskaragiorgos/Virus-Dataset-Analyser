@@ -9,7 +9,7 @@ Show menu
 Show infected countries Ctrl + S
 Show most infected Alt + M
 Show least infected Ctrl + M
-Show infected difference
+Show infected difference Alt + S
 =================================
 Graphs menu
 ===========
