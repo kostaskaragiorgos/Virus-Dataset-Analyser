@@ -61,7 +61,7 @@ class VirusDatasetAnalyser():
             df = pd.read_csv(self.filename)
             df['Date']= df['Date'].astype("string")
             self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
-            while self.asked_country is None or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
+            while self.asked_country is None or self.asked_country == "" or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
                 self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
             self.from_month = simpledialog.askinteger("From Month","Enter the from month", parent = self.master, minvalue=1, maxvalue=3)
             while self.from_month is None:
@@ -81,16 +81,16 @@ class VirusDatasetAnalyser():
                 while self.to_day is None:
                     self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
             
-            deaths_from = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Deaths']
-            deaths_to = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Deaths']
+            deaths_from = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Deaths']
+            deaths_to = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Deaths']
 
-            confirmed_from = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Confirmed']
-            confirmed_to = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Confirmed']
+            confirmed_from = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Confirmed']
+            confirmed_to = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Confirmed']
 
-            recovered_from = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Recovered']
-            recovered_to = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Recovered']
+            recovered_from = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Recovered']
+            recovered_to = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Recovered']
             
-            msg.showinfo("Difference", "Deaths increasted by:"+str(abs(int(deaths_from)-int(deaths_to))) + "\nConfirmed increasted by:"+str(abs(int(confirmed_from)-int(confirmed_to))) + "\nRecovered increasted by:"+str(abs(int(recovered_from)-int(recovered_to))))
+            msg.showinfo("Difference", "Country:"+self.asked_country+"\nDeaths increasted by:"+str(abs(int(deaths_from)-int(deaths_to))) + "\nConfirmed increasted by:"+str(abs(int(confirmed_from)-int(confirmed_to))) + "\nRecovered increasted by:"+str(abs(int(recovered_from)-int(recovered_to))))
 
     def mincases(self):
         """ shows name the least confirmed/Deaths/Recoverd countries"""
@@ -123,7 +123,7 @@ class VirusDatasetAnalyser():
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
-            while self.asked_country is None or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
+            while self.asked_country is None or self.asked_country == "" or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
                 self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
             data = [self.df[self.df['Country/Region'] == str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Recovered'].sum()]
             plt.bar(np.arange(3), data)
