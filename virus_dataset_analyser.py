@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 def helpmenu():
     """ help menu funciton """
+    msg.showinfo("Help","You can find valuable information from Kaggle's datasets about viruses")
 def aboutmenu():
     """ about menu function """
     msg.showinfo("About", "Version 1.0")
@@ -80,10 +81,10 @@ class VirusDatasetAnalyser():
                 while self.to_day is None:
                     self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
             
-            d_from = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]
-            d_to = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]
+            deaths_from = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Deaths']
+            deaths_to = df.loc[(df['Country/Region']=="Greece") &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Deaths']
 
-            msg.showinfo("Difference", str(d_from) + str(d_to))
+            msg.showinfo("Difference",  str(abs(int(deaths_from)-int(deaths_to))))
 
     def mincases(self):
         """ shows name the least confirmed/Deaths/Recoverd countries"""
