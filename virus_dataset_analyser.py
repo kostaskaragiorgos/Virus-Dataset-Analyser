@@ -128,7 +128,7 @@ class VirusDatasetAnalyser():
             data = [self.df[self.df['Country/Region'] == str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Recovered'].sum()]
             plt.bar(np.arange(3), data)
             plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))
-            plt.title(self.asked_country+" Deaths/Confirmed/Recovered")
+            plt.title(self.asked_country+" Deaths/Confirmed/Recovered Bar Chart")
             plt.show() 
     def insert_csv(self):
         """ insert csv function """
