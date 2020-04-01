@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 def helpmenu():
     """ help menu funciton """
-    msg.showinfo("Help","You can find valuable information from Kaggle's datasets about viruses")
+    msg.showinfo("Help", "You can find valuable information from Kaggle's datasets about viruses")
 def aboutmenu():
     """ about menu function """
     msg.showinfo("About", "Version 1.0")
@@ -56,39 +56,39 @@ class VirusDatasetAnalyser():
     def showinfdiff(self):
         """ shows the differences an infected country based on two specific dates """
         if self.filename == "":
-            msg.showerror("ERROR","NO FILE IMPORTED")
+            msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             df = pd.read_csv(self.filename)
-            df['Date']= df['Date'].astype("string")
+            df['Date'] = df['Date'].astype("string")
             self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
             while self.asked_country is None or self.asked_country == "" or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
                 self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
-            self.from_month = simpledialog.askinteger("From Month","Enter the from month", parent = self.master, minvalue=1, maxvalue=3)
+            self.from_month = simpledialog.askinteger("From Month", "Enter the from month", parent=self.master, minvalue=1, maxvalue=3)
             while self.from_month is None:
-                self.from_month = simpledialog.askinteger("From Month","Enter the from month", parent = self.master, minvalue=1, maxvalue=3)
-            self.from_day = simpledialog.askinteger("From Day","Enter the from day", parent = self.master, minvalue=1, maxvalue=31)
+                self.from_month = simpledialog.askinteger("From Month", "Enter the from month", parent=self.master, minvalue=1, maxvalue=3)
+            self.from_day = simpledialog.askinteger("From Day", "Enter the from day", parent=self.master, minvalue=1, maxvalue=31)
             while self.from_day is None:
-                self.from_day = simpledialog.askinteger("From Day","Enter the from day", parent = self.master, minvalue=1, maxvalue=31)
-            self.to_month = simpledialog.askinteger("To Month","Enter the to month", parent = self.master, minvalue=self.from_month, maxvalue=3)
+                self.from_day = simpledialog.askinteger("From Day", "Enter the from day", parent=self.master, minvalue=1, maxvalue=31)
+            self.to_month = simpledialog.askinteger("To Month", "Enter the to month", parent=self.master, minvalue=self.from_month, maxvalue=3)
             while self.to_month is None:
-                self.to_month = simpledialog.askinteger("To Month","Enter the to month", parent = self.master, minvalue=self.from_month, maxvalue=3)
+                self.to_month = simpledialog.askinteger("To Month", "Enter the to month", parent=self.master, minvalue=self.from_month, maxvalue=3)
             if self.to_month == self.from_month:
-                self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=self.from_day, maxvalue=31)
+                self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=self.from_day, maxvalue=31)
                 while self.to_day is None:
-                    self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=self.from_day, maxvalue=31)
+                    self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=self.from_day, maxvalue=31)
             else:
-                self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
+                self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=1, maxvalue=31)
                 while self.to_day is None:
-                    self.to_day = simpledialog.askinteger("To Day","Enter the to day", parent = self.master, minvalue=1, maxvalue=31)
+                    self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=1, maxvalue=31)
             
-            deaths_from = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Deaths']
-            deaths_to = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Deaths']
+            deaths_from = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.from_month, self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Deaths']
+            deaths_to = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.to_month, self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Deaths']
 
-            confirmed_from = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Confirmed']
-            confirmed_to = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Confirmed']
+            confirmed_from = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.from_month, self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Confirmed']
+            confirmed_to = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.to_month, self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Confirmed']
 
-            recovered_from = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.from_month,self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Recovered']
-            recovered_to = df.loc[(df['Country/Region']==self.asked_country) &(df['Date']==datetime.date(2020,self.to_month,self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X',''))]['Recovered']
+            recovered_from = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.from_month, self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Recovered']
+            recovered_to = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.to_month, self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Recovered']
             
             msg.showinfo("Difference", "Country:"+self.asked_country+"\nDeaths increasted by:"+str(abs(int(deaths_from)-int(deaths_to))) + "\nConfirmed increasted by:"+str(abs(int(confirmed_from)-int(confirmed_to))) + "\nRecovered increasted by:"+str(abs(int(recovered_from)-int(recovered_to))))
 
