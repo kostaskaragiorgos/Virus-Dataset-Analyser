@@ -16,15 +16,13 @@
   * [License](#License)
 <!--te-->
 
-# Files
+# Files/Folders
 
 <ul>
+  <li> images (images folder) </li>
   <li> keybinds.txt(keybinds file) </li>
   <li> virus_dataset_analyser.py (.py file) </li>
-  <li> virus_dataset_analyser.png (version file) </li>
-  <li> radon *(radon images) </li>
 </ul>
-
 
 # Dependencies
 
@@ -39,13 +37,11 @@
     <li> second way to install radon (pip install radon) </li>
 </ul>
 
-
 # Current_Version
 
 <p><img src ="images/virus_dataset_analyser version.png" title = "Virus Dataset Analyser Version"/> </p>
 
 # Radon
-
 
 <p><img src ="images/radon cc virus_dataset_analyser.png" title = "Virus Dataset Analyser Radon cc"/> </p>
 <p><img src ="images/radon hal virus_dataset_analyser.png" title = "Virus Dataset Analyser Radon hal"/> </p>

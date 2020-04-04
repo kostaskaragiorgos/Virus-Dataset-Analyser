@@ -85,15 +85,11 @@ class VirusDatasetAnalyser():
             self.show_diff_user_input()
             deaths_from = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.from_month, self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Deaths']
             deaths_to = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.to_month, self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Deaths']
-
             confirmed_from = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.from_month, self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Confirmed']
             confirmed_to = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.to_month, self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Confirmed']
-
             recovered_from = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.from_month, self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Recovered']
             recovered_to = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.to_month, self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Recovered']
-            
             msg.showinfo("Difference", "Country:"+self.asked_country+"\nDeaths increasted by:"+str(abs(int(deaths_from)-int(deaths_to))) + "\nConfirmed increasted by:"+str(abs(int(confirmed_from)-int(confirmed_to))) + "\nRecovered increasted by:"+str(abs(int(recovered_from)-int(recovered_to))))
-
     def mincases(self):
         """ shows name the least confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
