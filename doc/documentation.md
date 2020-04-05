@@ -51,3 +51,18 @@ An informative message pops up
 
 You press ok to close the app or cancel if you don't want
 
+# Show menu
+
+## Show infected countries
+
+You can show infected coutries using menu Show --> Show infected countries Ctrl+S keybind
+
+<p><img src ="doc images/show menu/show infected countries.png" title="infected countries"/> </p>
+
+if no .csv file is imported an informative message pops up
+
+<p><img src ="doc images/show menu/no file imported.png" title="no file imported"/> </p>
+
+else it shows the number and the names of the infected coutries
+
+<p><img src="doc images/show menu/show infected countries example.png" title="infected coutries"</p>
