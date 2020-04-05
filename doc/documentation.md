@@ -1,6 +1,8 @@
 # Virus Dataset Analyser Documentation
 
-## .csv file insertion
+# File menu
+
+## Insert a csv
 
 You can insert a .csv file using menu File --> Insert a csv or using Ctrl+O keybind
 
@@ -20,3 +22,20 @@ else
 an informative message pops up
 
 <p><img src = "doc images/file menu/no proper csv file inserted.png" title="No proper csv file"/> </p>
+
+## Close file
+
+You can close a .csv file using menu File --> Close file or using Ctrl+F4 keybind
+
+<p><img src = "doc images/file menu/close file.png" title="Close file"/> </p>
+
+if no .csv file is imported an informative message pops up
+
+<p><img src = "doc images/file menu/no file imported.png" title="No file imported"/> </p>
+
+else
+
+an informative message pops up
+
+<p><img src ="doc images/file menu/successful file close.png" title="successful file close"/> </p>
+
