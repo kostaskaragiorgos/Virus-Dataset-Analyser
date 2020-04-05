@@ -19,7 +19,8 @@
 # Files/Folders
 
 <ul>
-  <li> images (images folder) </li>
+  <li> ./doc (documentation folder)
+  <li> ./images (images folder) </li>
   <li> keybinds.txt(keybinds file) </li>
   <li> virus_dataset_analyser.py (.py file) </li>
 </ul>
