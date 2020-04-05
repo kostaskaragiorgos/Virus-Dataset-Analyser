@@ -11,6 +11,7 @@
   * [Files](#Files)
   * [Dependencies](#Dependencies)
   * [Current Version](#Current_Version)
+  * [Documentation](#Documentation)
   * [Radon](#Radon)
   * [Keybinds](#Keybinds)
   * [License](#License)
@@ -41,6 +42,10 @@
 # Current_Version
 
 <p><img src ="images/virus_dataset_analyser version.png" title = "Virus Dataset Analyser Version"/> </p>
+
+# Documentation
+
+All project documentation is located in the `./doc`  folder.
 
 # Radon
 
