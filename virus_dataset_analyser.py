@@ -120,9 +120,9 @@ class VirusDatasetAnalyser():
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
-            self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
+            self.asked_country = simpledialog.askstring("Country", "Enter the name of the country")
             while self.asked_country is None or self.asked_country == "" or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
-                self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
+                self.asked_country = simpledialog.askstring("Country", "Enter the name of the country")
             data = [self.df[self.df['Country/Region'] == str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Recovered'].sum()]
             plt.bar(np.arange(3), data)
             plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))

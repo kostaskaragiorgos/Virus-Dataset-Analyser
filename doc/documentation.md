@@ -55,7 +55,7 @@ You press ok to close the app or cancel if you don't want
 
 ## Show infected countries
 
-You can show infected coutries using menu Show --> Show infected countries Ctrl+S keybind
+You can see  infected coutries using menu Show --> Show infected countries Ctrl+S keybind
 
 <p><img src ="doc images/show menu/show infected countries.png" title="infected countries"/> </p>
 
@@ -66,3 +66,51 @@ if no .csv file is imported an informative message pops up
 else it shows the number and the names of the infected coutries
 
 <p><img src="doc images/show menu/show infected countries example.png" title="infected coutries"</p>
+
+## Show most infected
+
+You can see the most infected coutries using menu Show --> Show most infected or by Alt + M keybind 
+
+<p><img src ="doc images/show menu/show most infected countries.png" title = "most infected coutrines"/> </p>
+
+if no .csv file is imported an informative message pops up
+
+<p><img src ="doc images/show menu/no file imported.png" title="no file imported"/> </p>
+
+else it shows the most infected countries by deaths/cases/recoverd
+
+<p><img src ="doc images/show menu/most infected.png" title="most infected"/></p>
+
+## Show least infected 
+
+You can see the least infected using menu Show --> Show least infected or by Ctrl + M keybind
+
+if no .csv file is imported an informative message pops up
+
+<p><img src ="doc images/show menu/no file imported.png" title="no file imported"/> </p>
+
+else it shows the least infected countries by deaths/cases/recoverd
+
+<p><img src ="doc images/show menu/least infected.png" title="most infected"/></p>
+
+# Graphs
+
+## Show cases by coutry
+
+You can see a bar graph of confirmed/Deaths/Recoved of a specific country using menu Graphs--> Show cases by country or by Ctrl + T keybind
+
+<p><img src ="doc images/Graphs menu/Show cases by country.png" title="Show cases by country"/> </p>
+
+if no .csv file is imported an informative message pops up
+
+<p><img src ="doc images/Graphs menu/no file imported.png" title="no file imported"/> </p>
+
+else a pop up window asks for a country name and shows a bar graph of the country
+
+Pop up
+
+<p><img src ="doc images/Graphs menu/infected pop up.png" title="infected pop up window"/></p>
+
+Example
+
+<p><img src ="doc images/Graphs menu/show infected bar graph.png" title="infected bar graph example"/></p>
