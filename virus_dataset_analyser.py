@@ -77,7 +77,16 @@ class VirusDatasetAnalyser():
             while self.to_day is None:
                 self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=1, maxvalue=31)
     def time_series(self):
-        pass
+        if self.filename == "":
+            msg.showerror("ERROR", "NO FILE IMPORTED")
+        else:
+            df = pd.read_csv(self.filename)
+            country_to_plot = simpledialog.askstring("Country", "Enter the name of the country")
+            while country_to_plot is None or country_to_plot == "" or not self.df['Country/Region'].str.contains(str(country_to_plot)).any():
+                country_to_plot = simpledialog.askstring("Country", "Enter the name of the country")
+            df[df['Country/Region']==country_to_plot].plot(x='Date', y=['Confirmed','Deaths','Recovered'])
+            plt.show()
+        
     def showinfdiff(self):
         """ shows the differences an infected country based on two specific dates """
         if self.filename == "":
