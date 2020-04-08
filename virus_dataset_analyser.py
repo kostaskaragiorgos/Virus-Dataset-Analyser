@@ -77,6 +77,7 @@ class VirusDatasetAnalyser():
             while self.to_day is None:
                 self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=1, maxvalue=31)
     def time_series(self):
+        """ plots growth Confirmed/Deaths/Recoverd  of a specific country"""
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
