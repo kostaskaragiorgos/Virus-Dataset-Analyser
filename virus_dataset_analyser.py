@@ -35,6 +35,7 @@ class VirusDatasetAnalyser():
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
+        self.cases_graph_menu.add_command(label="Time series",command=self.time_series)
         self.menu.add_cascade(label="Graphs", menu=self.cases_graph_menu)
         self.about_menu = Menu(self.menu, tearoff=0)
         self.about_menu.add_command(label="About", accelerator='Ctrl+I', command=aboutmenu)
@@ -75,6 +76,8 @@ class VirusDatasetAnalyser():
             self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=1, maxvalue=31)
             while self.to_day is None:
                 self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=1, maxvalue=31)
+    def time_series(self):
+        pass
     def showinfdiff(self):
         """ shows the differences an infected country based on two specific dates """
         if self.filename == "":
