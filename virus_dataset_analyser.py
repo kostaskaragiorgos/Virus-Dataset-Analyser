@@ -150,7 +150,7 @@ class VirusDatasetAnalyser():
             if ".csv" in self.filename:
                 self.df = pd.read_csv(self.filename)
                 if all([item in self.df.columns for item in ['Province/State', 'Country/Region', 'Lat', 'Long', 'Date', 'Confirmed', 'Deaths', 'Recovered']]):
-                    self.df = self.df.drop_duplicates(subset='Country/Region', keep='last')
+                    self.df.drop_duplicates(subset='Country/Region', keep='last', inplace=True)
                     self.df['Country/Region'] = self.df['Country/Region'].astype("string")
                     msg.showinfo("SUCCESS", "CSV FILE ADDED SUCCESSFULLY")
                 else:
