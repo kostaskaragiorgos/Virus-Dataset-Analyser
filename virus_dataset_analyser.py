@@ -86,7 +86,7 @@ class VirusDatasetAnalyser():
             country_to_plot = simpledialog.askstring("Country", "Enter the name of the country")
             while country_to_plot is None or country_to_plot == "" or not self.df['Country/Region'].str.contains(str(country_to_plot)).any():
                 country_to_plot = simpledialog.askstring("Country", "Enter the name of the country")
-            df[df['Country/Region']==country_to_plot].plot(x='Date', y=['Confirmed','Deaths','Recovered'])
+            df[df['Country/Region'] == country_to_plot].plot(x='Date', y=['Confirmed', 'Deaths', 'Recovered'])
             plt.show()
         
     def showinfdiff(self):
