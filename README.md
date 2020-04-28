@@ -6,7 +6,7 @@
 # Table of contents
 
 <!--ts-->
-  * [Stock-Analysis](#Stock-Analysis)
+  * [Virus-Dataset-Analyser](#Virus-Dataset-Analyser)
   * [Table of contents](#Table_of_contents)
   * [Files](#Files)
   * [Dependencies](#Dependencies)
@@ -24,7 +24,7 @@
 # Files/Folders
 
 <ul>
-  <li> ./doc (documentation folder)
+  <li> ./doc (documentation folder) </li>
   <li> ./images (images folder) </li>
   <li> keybinds.txt(keybinds file) </li>
   <li> virus_dataset_analyser.py (.py file) </li>
