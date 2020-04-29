@@ -55,55 +55,21 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
         self.master.bind('<Alt-s>', lambda event: self.showinfdiff())
-    def show_diff_user_input(self):
-        """ gets the user input so it can be used to show an infected counrty on two specific dates """
-        self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
-        while self.asked_country is None or self.asked_country == "" or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
-            self.asked_country = simpledialog.askstring("Country", "Insert the name of the country")
-        self.from_month = simpledialog.askinteger("From Month", "Enter the from month", parent=self.master, minvalue=1, maxvalue=3)
-        while self.from_month is None:
-            self.from_month = simpledialog.askinteger("From Month", "Enter the from month", parent=self.master, minvalue=1, maxvalue=3)
-        self.from_day = simpledialog.askinteger("From Day", "Enter the from day", parent=self.master, minvalue=1, maxvalue=31)
-        while self.from_day is None:
-            self.from_day = simpledialog.askinteger("From Day", "Enter the from day", parent=self.master, minvalue=1, maxvalue=31)
-        self.to_month = simpledialog.askinteger("To Month", "Enter the to month", parent=self.master, minvalue=self.from_month, maxvalue=3)
-        while self.to_month is None:
-            self.to_month = simpledialog.askinteger("To Month", "Enter the to month", parent=self.master, minvalue=self.from_month, maxvalue=3)
-        if self.to_month == self.from_month:
-            self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=self.from_day, maxvalue=31)
-            while self.to_day is None:
-                self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=self.from_day, maxvalue=31)
-        else:
-            self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=1, maxvalue=31)
-            while self.to_day is None:
-                self.to_day = simpledialog.askinteger("To Day", "Enter the to day", parent=self.master, minvalue=1, maxvalue=31)
     def time_series(self):
         """ plots growth Confirmed/Deaths/Recoverd  of a specific country"""
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             df = pd.read_csv(self.filename)
-            country_to_plot = simpledialog.askstring("Country", "Enter the name of the country")
-            while country_to_plot is None or country_to_plot == "" or not self.df['Country/Region'].str.contains(str(country_to_plot)).any():
-                country_to_plot = simpledialog.askstring("Country", "Enter the name of the country")
-            df[df['Country/Region'] == country_to_plot].plot(x='Date', y=['Confirmed', 'Deaths', 'Recovered'])
+            self.user_input()
+            df[df['Country/Region'] == self.asked_country].plot(x='Date', y=['Confirmed', 'Deaths', 'Recovered'])
             plt.show()
-        
     def showinfdiff(self):
         """ shows the differences an infected country based on two specific dates """
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
-            df = pd.read_csv(self.filename)
-            df['Date'] = df['Date'].astype("string")
-            self.show_diff_user_input()
-            deaths_from = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.from_month, self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Deaths']
-            deaths_to = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.to_month, self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Deaths']
-            confirmed_from = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.from_month, self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Confirmed']
-            confirmed_to = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.to_month, self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Confirmed']
-            recovered_from = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.from_month, self.from_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Recovered']
-            recovered_to = df.loc[(df['Country/Region'] == self.asked_country) & (df['Date'] == datetime.date(2020, self.to_month, self.to_day).strftime("X%m/X%d/%y").replace("X0", "X").replace('X', ''))]['Recovered']
-            msg.showinfo("Difference", "Country:"+self.asked_country+"\nDeaths increasted by:"+str(abs(int(deaths_from)-int(deaths_to))) + "\nConfirmed increasted by:"+str(abs(int(confirmed_from)-int(confirmed_to))) + "\nRecovered increasted by:"+str(abs(int(recovered_from)-int(recovered_to))))
+          pass #TODO
     def mincases(self):
         """ shows name the least confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
@@ -129,14 +95,17 @@ class VirusDatasetAnalyser():
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             msg.showinfo("Infected countries", "There are " + str(len(self.df['Country/Region'])) +" infected coutries. \n"+str(list(self.df['Country/Region'])))
+    def user_input(self):
+        """ user input for casesbycountry and time_series functions"""
+        self.asked_country = simpledialog.askstring("Country", "Enter the name of the country")
+        while self.asked_country is None or self.asked_country == "" or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
+            self.asked_country = simpledialog.askstring("Country", "Enter the name of the country")
     def casesbycountry(self):
         """ plots an Deaths/Confirmed/Recovered cases graph of a chosen country"""
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
-            self.asked_country = simpledialog.askstring("Country", "Enter the name of the country")
-            while self.asked_country is None or self.asked_country == "" or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
-                self.asked_country = simpledialog.askstring("Country", "Enter the name of the country")
+            self.user_input()
             data = [self.df[self.df['Country/Region'] == str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Recovered'].sum()]
             plt.bar(np.arange(3), data)
             plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))
