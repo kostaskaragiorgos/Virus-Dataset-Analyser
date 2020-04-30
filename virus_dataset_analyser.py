@@ -110,24 +110,28 @@ class VirusDatasetAnalyser():
             plt.bar(np.arange(3), data)
             plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))
             plt.title(self.asked_country+" Deaths/Confirmed/Recovered Bar Chart")
-            plt.show() 
-    def insert_csv(self):
-        """ insert csv function """
-        if self.filename == "":   # csv file stracture : Province/State,Country/Region,Lat,Long,Date,Confirmed,Deaths,Recovered
-            self.filename = filedialog.askopenfilename(initialdir="/", title="Select csv file",
-                                                       filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
-            if ".csv" in self.filename:
-                self.df = pd.read_csv(self.filename)
-                if all([item in self.df.columns for item in ['Province/State', 'Country/Region', 'Lat', 'Long', 'Date', 'Confirmed', 'Deaths', 'Recovered']]):
-                    self.df.drop_duplicates(subset='Country/Region', keep='last', inplace=True)
-                    self.df['Country/Region'] = self.df['Country/Region'].astype("string")
-                    msg.showinfo("SUCCESS", "CSV FILE ADDED SUCCESSFULLY")
-                else:
-                    self.filename = ""
-                    msg.showerror("ERROR", "NO PROPER CSV ")
+            plt.show()
+    def file_input_validation(self):
+        """ user input validation  csv file stracture : Province/State,Country/Region,Lat,Long,Date,Confirmed,Deaths,Recovered"""
+        if ".csv" in self.filename:
+            self.df = pd.read_csv(self.filename)
+            if all([item in self.df.columns for item in ['Province/State', 'Country/Region', 'Lat', 'Long', 'Date', 'Confirmed', 'Deaths', 'Recovered']]):
+                self.df.drop_duplicates(subset='Country/Region', keep='last', inplace=True)
+                self.df['Country/Region'] = self.df['Country/Region'].astype("string")
+                msg.showinfo("SUCCESS", "CSV FILE ADDED SUCCESSFULLY")
             else:
                 self.filename = ""
-                msg.showerror("ERROR", "NO CSV IMPORTED")
+                msg.showerror("ERROR", "NO PROPER CSV ")
+        else:
+            self.filename = ""
+            msg.showerror("ERROR", "NO CSV IMPORTED")
+
+    def insert_csv(self):
+        """ insert csv function """
+        if self.filename == "":   
+            self.filename = filedialog.askopenfilename(initialdir="/", title="Select csv file",
+                                                       filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+            self.file_input_validation()
         else:
             msg.showerror("Error", " A CSV FILE IS ALREADY OPEN")
     def exitmenu(self):
