@@ -10,10 +10,15 @@ Show infected countries Ctrl + S
 Show most infected Alt + M
 Show least infected Ctrl + M
 Show infected difference Alt + S
+Show number of active cases by  country Alt + T
 =================================
 Graphs menu
 ===========
 Show cases by country Ctrl + T
+Time series Ctrl + P
+Time series of deaths Ctrl + D
+Time series of confirmed Alt + D
+Time series of recoverd Ctrl + R
 ==============================
 About menu
 ==============
