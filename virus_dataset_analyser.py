@@ -3,7 +3,6 @@ Virus dataset analyser
 """
 from tkinter import Tk, Menu, filedialog, simpledialog
 from tkinter import messagebox as msg
-import datetime
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -32,7 +31,7 @@ class VirusDatasetAnalyser():
         self.show_menu.add_command(label="Show most infected", accelerator='Alt+M', command=self.maxcases)
         self.show_menu.add_command(label="Show least infected", accelerator='Ctrl+M', command=self.mincases)
         self.show_menu.add_command(label="Show infected difference", accelerator='Alt+S', command=self.showinfdiff)
-        self.show_menu.add_command(label="Show number of active cases by country", accelerator='Alt+T',command=self.active_cases)
+        self.show_menu.add_command(label="Show number of active cases by country", accelerator='Alt+T', command=self.active_cases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
@@ -69,17 +68,17 @@ class VirusDatasetAnalyser():
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             self.user_input()
-            msg.showinfo("Acitve Cases","Active cases of "+self.asked_country+ str(self.df[self.df['Country/Region']==self.asked_country]['Confirmed'].sum()
-                                    - self.df[self.df['Country/Region']==self.asked_country]['Deaths'].sum()
-                                    - self.df[self.df['Country/Region']==self.asked_country]['Recovered'].sum()))
-    def time_series_of(self,state):
+            msg.showinfo("Acitve Cases", "Active cases of "+self.asked_country+ str(self.df[self.df['Country/Region'] == self.asked_country]['Confirmed'].sum()
+                                                                                    - self.df[self.df['Country/Region'] == self.asked_country]['Deaths'].sum()
+                                                                                    - self.df[self.df['Country/Region'] == self.asked_country]['Recovered'].sum()))
+    def time_series_of(self, state):
         """ plots growth of Confirmed/Deaths/Recovered by time of a specific country"""
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             df = pd.read_csv(self.filename)
             self.user_input()
-            if state=='all':
+            if state == 'all':
                 df[df['Country/Region'] == self.asked_country].plot(x='Date', y=['Confirmed', 'Deaths', 'Recovered'])
             else:
                 df[df['Country/Region'] == self.asked_country].plot(x='Date', y=[state])
@@ -88,8 +87,6 @@ class VirusDatasetAnalyser():
         """ shows the differences an infected country based on two specific dates """
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
-        else:
-          pass #TODO
     def mincases(self):
         """ shows name the least confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
