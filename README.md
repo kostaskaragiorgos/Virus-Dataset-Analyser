@@ -78,8 +78,13 @@ All project documentation is located in the `./doc`  folder.
   <li> Show infected countries Ctrl+S </li>
   <li> Show most infected Alt+M </li>
   <li> Show least infected Ctrl+M </li>
-  <li> Show infected difference Alt+S</li>
-  <li> show cases by country Ctrl+T </li>
+  <li> Show infected difference Alt+S </li>
+  <li> Show number of active cases by country Alt + T </li>
+  <li> Show cases by country Ctrl+T </li>
+  <li> Time series Ctrl+ P </li>
+  <li> Time series of deaths Ctrl + D </li>
+  <li> Time series of confirmed Alt + D </li>
+  <li> Time series of recoverd Ctrl + R </li>
   <li> About Ctrl+I </li>
   <li> Help Ctrl+F1 </li>
 </ul>
