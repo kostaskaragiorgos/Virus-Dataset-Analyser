@@ -32,6 +32,7 @@ class VirusDatasetAnalyser():
         self.show_menu.add_command(label="Show most infected", accelerator='Alt+M', command=self.maxcases)
         self.show_menu.add_command(label="Show least infected", accelerator='Ctrl+M', command=self.mincases)
         self.show_menu.add_command(label="Show infected difference", accelerator='Alt+S', command=self.showinfdiff)
+        self.show_menu.add_command(label="Show number of active cases by country",command=self.active_cases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
@@ -58,6 +59,12 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
         self.master.bind('<Alt-s>', lambda event: self.showinfdiff())
+    def active_cases(self):
+        """ shows the number of active cases of a country """ 
+        self.user_input()
+        msg.showinfo("Acitve Cases","Active cases of "+self.asked_country+ str(self.df[self.df['Country/Region']==self.asked_country]['Confirmed'].sum()
+                                    - self.df[self.df['Country/Region']==self.asked_country]['Deaths'].sum()
+                                    - self.df[self.df['Country/Region']==self.asked_country]['Recovered'].sum()))
     def time_series_of(self,state):
         """ plots growth of Confirmed/Deaths/Recovered by time of a specific country"""
         if self.filename == "":
