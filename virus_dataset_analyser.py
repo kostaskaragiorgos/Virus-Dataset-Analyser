@@ -32,7 +32,7 @@ class VirusDatasetAnalyser():
         self.show_menu.add_command(label="Show most infected", accelerator='Alt+M', command=self.maxcases)
         self.show_menu.add_command(label="Show least infected", accelerator='Ctrl+M', command=self.mincases)
         self.show_menu.add_command(label="Show infected difference", accelerator='Alt+S', command=self.showinfdiff)
-        self.show_menu.add_command(label="Show number of active cases by country",command=self.active_cases)
+        self.show_menu.add_command(label="Show number of active cases by country", accelerator='Alt+T',command=self.active_cases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
@@ -48,6 +48,7 @@ class VirusDatasetAnalyser():
         self.help_menu.add_command(label="Help", accelerator='Ctrl+F1', command=helpmenu)
         self.menu.add_cascade(label="Help", menu=self.help_menu)
         self.master.config(menu=self.menu)
+        self.master.bind('<Alt-t>', lambda event:self.active_cases())
         self.master.bind('<Control-p>', lambda event: self.time_series_of('all'))
         self.master.bind('<Alt-m>', lambda event: self.maxcases())
         self.master.bind('<Control-m>', lambda event: self.mincases())
@@ -60,9 +61,12 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-i>', lambda event: aboutmenu())
         self.master.bind('<Alt-s>', lambda event: self.showinfdiff())
     def active_cases(self):
-        """ shows the number of active cases of a country """ 
-        self.user_input()
-        msg.showinfo("Acitve Cases","Active cases of "+self.asked_country+ str(self.df[self.df['Country/Region']==self.asked_country]['Confirmed'].sum()
+        """ shows the number of active cases of a country """
+        if self.filename == "":
+            msg.showerror("ERROR", "NO FILE IMPORTED")
+        else:
+            self.user_input()
+            msg.showinfo("Acitve Cases","Active cases of "+self.asked_country+ str(self.df[self.df['Country/Region']==self.asked_country]['Confirmed'].sum()
                                     - self.df[self.df['Country/Region']==self.asked_country]['Deaths'].sum()
                                     - self.df[self.df['Country/Region']==self.asked_country]['Recovered'].sum()))
     def time_series_of(self,state):
