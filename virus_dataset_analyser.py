@@ -35,7 +35,10 @@ class VirusDatasetAnalyser():
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
-        self.cases_graph_menu.add_command(label="Time series", accelerator='Ctrl+P', command=self.time_series)
+        self.cases_graph_menu.add_command(label="Time series", accelerator='Ctrl+P', command=lambda: self.time_series_of('all'))
+        self.cases_graph_menu.add_command(label="Time series of deaths",  command=lambda: self.time_series_of('Deaths'))
+        self.cases_graph_menu.add_command(label="Time series of confirmed",  command=lambda: self.time_series_of('Confirmed'))
+        self.cases_graph_menu.add_command(label="Time series of recovered",  command=lambda: self.time_series_of('Recovered'))
         self.menu.add_cascade(label="Graphs", menu=self.cases_graph_menu)
         self.about_menu = Menu(self.menu, tearoff=0)
         self.about_menu.add_command(label="About", accelerator='Ctrl+I', command=aboutmenu)
@@ -44,7 +47,7 @@ class VirusDatasetAnalyser():
         self.help_menu.add_command(label="Help", accelerator='Ctrl+F1', command=helpmenu)
         self.menu.add_cascade(label="Help", menu=self.help_menu)
         self.master.config(menu=self.menu)
-        self.master.bind('<Control-p>', lambda event: self.time_series())
+        self.master.bind('<Control-p>', lambda event: self.time_series_of('all'))
         self.master.bind('<Alt-m>', lambda event: self.maxcases())
         self.master.bind('<Control-m>', lambda event: self.mincases())
         self.master.bind('<Control-t>', lambda event: self.casesbycountry())
@@ -55,14 +58,17 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
         self.master.bind('<Alt-s>', lambda event: self.showinfdiff())
-    def time_series(self):
-        """ plots growth Confirmed/Deaths/Recoverd  of a specific country"""
+    def time_series_of(self,state):
+        """ plots growth of Confirmed/Deaths/Recovered by time of a specific country"""
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             df = pd.read_csv(self.filename)
             self.user_input()
-            df[df['Country/Region'] == self.asked_country].plot(x='Date', y=['Confirmed', 'Deaths', 'Recovered'])
+            if state=='all':
+                df[df['Country/Region'] == self.asked_country].plot(x='Date', y=['Confirmed', 'Deaths', 'Recovered'])
+            else:
+                df[df['Country/Region'] == self.asked_country].plot(x='Date', y=[state])
             plt.show()
     def showinfdiff(self):
         """ shows the differences an infected country based on two specific dates """
