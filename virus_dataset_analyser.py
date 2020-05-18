@@ -128,17 +128,19 @@ class VirusDatasetAnalyser():
             plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))
             plt.title(self.asked_country+" Deaths/Confirmed/Recovered Bar Chart")
             plt.show()
+    def check_columns(self):
+        if all([item in self.df.columns for item in ['Province/State', 'Country/Region', 'Lat', 'Long', 'Date', 'Confirmed', 'Deaths', 'Recovered']]):
+            self.df.drop_duplicates(subset='Country/Region', keep='last', inplace=True)
+            self.df['Country/Region'] = self.df['Country/Region'].astype("string")
+            msg.showinfo("SUCCESS", "CSV FILE ADDED SUCCESSFULLY")
+        else:
+            self.filename = ""
+            msg.showerror("ERROR", "NO PROPER CSV ")
     def file_input_validation(self):
         """ user input validation  csv file stracture : Province/State,Country/Region,Lat,Long,Date,Confirmed,Deaths,Recovered"""
         if ".csv" in self.filename:
             self.df = pd.read_csv(self.filename)
-            if all([item in self.df.columns for item in ['Province/State', 'Country/Region', 'Lat', 'Long', 'Date', 'Confirmed', 'Deaths', 'Recovered']]):
-                self.df.drop_duplicates(subset='Country/Region', keep='last', inplace=True)
-                self.df['Country/Region'] = self.df['Country/Region'].astype("string")
-                msg.showinfo("SUCCESS", "CSV FILE ADDED SUCCESSFULLY")
-            else:
-                self.filename = ""
-                msg.showerror("ERROR", "NO PROPER CSV ")
+            self.check_columns()
         else:
             self.filename = ""
             msg.showerror("ERROR", "NO CSV IMPORTED")
