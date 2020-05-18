@@ -115,7 +115,7 @@ class VirusDatasetAnalyser():
     def user_input(self):
         """ user input for casesbycountry and time_series functions"""
         self.asked_country = simpledialog.askstring("Country", "Enter the name of the country")
-        while self.asked_country is None or self.asked_country == "" or not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
+        while  not self.df['Country/Region'].str.contains(str(self.asked_country)).any():
             self.asked_country = simpledialog.askstring("Country", "Enter the name of the country")
     def casesbycountry(self):
         """ plots an Deaths/Confirmed/Recovered cases graph of a chosen country"""
