@@ -22,16 +22,23 @@ class VirusDatasetAnalyser():
         self.filename = ""
         self.menu = Menu(self.master)
         self.file_menu = Menu(self.menu, tearoff=0)
-        self.file_menu.add_command(label="Insert a csv", accelerator='Ctrl+O', command=self.insert_csv)
-        self.file_menu.add_command(label="Close file", accelerator='Ctrl+F4', command=self.closefile)
+        self.file_menu.add_command(label="Insert a csv",
+                                   accelerator='Ctrl+O', command=self.insert_csv)
+        self.file_menu.add_command(label="Close file",
+                                   accelerator='Ctrl+F4', command=self.closefile)
         self.file_menu.add_command(label="Exit", accelerator='Alt+F4', command=self.exitmenu)
         self.menu.add_cascade(label="File", menu=self.file_menu)
         self.show_menu = Menu(self.menu, tearoff=0)
-        self.show_menu.add_command(label="Show infected countries", accelerator='Ctrl+S', command=self.infcountries)
-        self.show_menu.add_command(label="Show most infected", accelerator='Alt+M', command=self.maxcases)
-        self.show_menu.add_command(label="Show least infected", accelerator='Ctrl+M', command=self.mincases)
-        self.show_menu.add_command(label="Show infected difference", accelerator='Alt+S', command=self.showinfdiff)
-        self.show_menu.add_command(label="Show number of active cases by country", accelerator='Alt+T', command=self.active_cases)
+        self.show_menu.add_command(label="Show infected countries",
+                                   accelerator='Ctrl+S', command=self.infcountries)
+        self.show_menu.add_command(label="Show most infected",
+                                   accelerator='Alt+M', command=self.maxcases)
+        self.show_menu.add_command(label="Show least infected",
+                                   accelerator='Ctrl+M', command=self.mincases)
+        self.show_menu.add_command(label="Show infected difference",
+                                   accelerator='Alt+S', command=self.showinfdiff)
+        self.show_menu.add_command(label="Show number of active cases by country",
+                                   accelerator='Alt+T', command=self.active_cases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
@@ -129,6 +136,7 @@ class VirusDatasetAnalyser():
             plt.title(self.asked_country+" Deaths/Confirmed/Recovered Bar Chart")
             plt.show()
     def check_columns(self):
+        """ checks the columns name from the importrd .csv file """
         if all([item in self.df.columns for item in ['Province/State', 'Country/Region', 'Lat', 'Long', 'Date', 'Confirmed', 'Deaths', 'Recovered']]):
             self.df.drop_duplicates(subset='Country/Region', keep='last', inplace=True)
             self.df['Country/Region'] = self.df['Country/Region'].astype("string")
@@ -147,7 +155,7 @@ class VirusDatasetAnalyser():
 
     def insert_csv(self):
         """ insert csv function """
-        if self.filename == "":   
+        if self.filename == "":
             self.filename = filedialog.askopenfilename(initialdir="/", title="Select csv file",
                                                        filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
             self.file_input_validation()
