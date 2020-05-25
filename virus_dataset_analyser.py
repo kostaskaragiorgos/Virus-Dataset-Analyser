@@ -41,11 +41,16 @@ class VirusDatasetAnalyser():
                                    accelerator='Alt+T', command=self.active_cases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
-        self.cases_graph_menu.add_command(label="Show cases by country", accelerator='Ctrl+T', command=self.casesbycountry)
-        self.cases_graph_menu.add_command(label="Time series", accelerator='Ctrl+P', command=lambda: self.time_series_of('all'))
-        self.cases_graph_menu.add_command(label="Time series of deaths", accelerator='Ctrl+D', command=lambda: self.time_series_of('Deaths'))
-        self.cases_graph_menu.add_command(label="Time series of confirmed", accelerator='Alt+D', command=lambda: self.time_series_of('Confirmed'))
-        self.cases_graph_menu.add_command(label="Time series of recovered", accelerator='Ctrl+R', command=lambda: self.time_series_of('Recovered'))
+        self.cases_graph_menu.add_command(label="Show cases by country",
+                                          accelerator='Ctrl+T', command=self.casesbycountry)
+        self.cases_graph_menu.add_command(label="Time series", accelerator='Ctrl+P',
+                                          command=lambda: self.time_series_of('all'))
+        self.cases_graph_menu.add_command(label="Time series of deaths", accelerator='Ctrl+D',
+                                          command=lambda: self.time_series_of('Deaths'))
+        self.cases_graph_menu.add_command(label="Time series of confirmed", accelerator='Alt+D',
+                                          command=lambda: self.time_series_of('Confirmed'))
+        self.cases_graph_menu.add_command(label="Time series of recovered", accelerator='Ctrl+R',
+                                          command=lambda: self.time_series_of('Recovered'))
         self.menu.add_cascade(label="Graphs", menu=self.cases_graph_menu)
         self.about_menu = Menu(self.menu, tearoff=0)
         self.about_menu.add_command(label="About", accelerator='Ctrl+I', command=aboutmenu)
@@ -75,9 +80,11 @@ class VirusDatasetAnalyser():
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             self.user_input()
-            msg.showinfo("Acitve Cases", "Active cases of "+self.asked_country+ str(self.df[self.df['Country/Region'] == self.asked_country]['Confirmed'].sum()
-                                                                                    - self.df[self.df['Country/Region'] == self.asked_country]['Deaths'].sum()
-                                                                                    - self.df[self.df['Country/Region'] == self.asked_country]['Recovered'].sum()))
+            msg.showinfo("Acitve Cases", "Active cases of "+
+                         self.asked_country+
+                         str(self.df[self.df['Country/Region'] == self.asked_country]['Confirmed'].sum()
+                             -self.df[self.df['Country/Region'] == self.asked_country]['Deaths'].sum()
+                             -self.df[self.df['Country/Region'] == self.asked_country]['Recovered'].sum()))
     def time_series_of(self, state):
         """ plots growth of Confirmed/Deaths/Recovered by time of a specific country"""
         if self.filename == "":
@@ -86,7 +93,8 @@ class VirusDatasetAnalyser():
             df = pd.read_csv(self.filename)
             self.user_input()
             if state == 'all':
-                df[df['Country/Region'] == self.asked_country].plot(x='Date', y=['Confirmed', 'Deaths', 'Recovered'])
+                df[df['Country/Region'] == self.asked_country].plot(x='Date',
+                                                                    y=['Confirmed', 'Deaths', 'Recovered'])
             else:
                 df[df['Country/Region'] == self.asked_country].plot(x='Date', y=[state])
             plt.show()
@@ -118,7 +126,9 @@ class VirusDatasetAnalyser():
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
-            msg.showinfo("Infected countries", "There are " + str(len(self.df['Country/Region'])) +" infected coutries. \n"+str(list(self.df['Country/Region'])))
+            msg.showinfo("Infected countries", "There are " +
+                         str(len(self.df['Country/Region'])) +
+                         " infected coutries. \n"+str(list(self.df['Country/Region'])))
     def user_input(self):
         """ user input for casesbycountry and time_series functions"""
         self.asked_country = simpledialog.askstring("Country", "Enter the name of the country")
@@ -130,7 +140,9 @@ class VirusDatasetAnalyser():
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             self.user_input()
-            data = [self.df[self.df['Country/Region'] == str(self.asked_country)]['Deaths'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Confirmed'].sum(), self.df[self.df['Country/Region'] == str(self.asked_country)]['Recovered'].sum()]
+            data = [self.df[self.df['Country/Region'] == str(self.asked_country)]['Deaths'].sum(),
+                    self.df[self.df['Country/Region'] == str(self.asked_country)]['Confirmed'].sum(),
+                    self.df[self.df['Country/Region'] == str(self.asked_country)]['Recovered'].sum()]
             plt.bar(np.arange(3), data)
             plt.xticks(np.arange(3), ('Deaths', 'Confirmed', 'Recovered'))
             plt.title(self.asked_country+" Deaths/Confirmed/Recovered Bar Chart")
@@ -145,7 +157,7 @@ class VirusDatasetAnalyser():
             self.filename = ""
             msg.showerror("ERROR", "NO PROPER CSV ")
     def file_input_validation(self):
-        """ user input validation  csv file stracture : Province/State,Country/Region,Lat,Long,Date,Confirmed,Deaths,Recovered"""
+        """ user input validation """
         if ".csv" in self.filename:
             self.df = pd.read_csv(self.filename)
             self.check_columns()
@@ -157,7 +169,8 @@ class VirusDatasetAnalyser():
         """ insert csv function """
         if self.filename == "":
             self.filename = filedialog.askopenfilename(initialdir="/", title="Select csv file",
-                                                       filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+                                                       filetypes=(("csv files", "*.csv"),
+                                                                  ("all files", "*.*")))
             self.file_input_validation()
         else:
             msg.showerror("Error", " A CSV FILE IS ALREADY OPEN")
