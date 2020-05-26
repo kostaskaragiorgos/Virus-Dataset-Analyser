@@ -82,9 +82,12 @@ class VirusDatasetAnalyser():
             self.user_input()
             msg.showinfo("Acitve Cases", "Active cases of "+
                          self.asked_country+
-                         str(self.df[self.df['Country/Region'] == self.asked_country]['Confirmed'].sum()
-                             -self.df[self.df['Country/Region'] == self.asked_country]['Deaths'].sum()
-                             -self.df[self.df['Country/Region'] == self.asked_country]['Recovered'].sum()))
+                         str(self.df[self.df['Country/Region'] == self.asked_country]
+                             ['Confirmed'].sum()
+                             -self.df[self.df['Country/Region'] == self.asked_country]
+                             ['Deaths'].sum()
+                             -self.df[self.df['Country/Region'] == self.asked_country]
+                             ['Recovered'].sum()))
     def time_series_of(self, state):
         """ plots growth of Confirmed/Deaths/Recovered by time of a specific country"""
         if self.filename == "":
@@ -94,7 +97,9 @@ class VirusDatasetAnalyser():
             self.user_input()
             if state == 'all':
                 df[df['Country/Region'] == self.asked_country].plot(x='Date',
-                                                                    y=['Confirmed', 'Deaths', 'Recovered'])
+                                                                    y=['Confirmed',
+                                                                       'Deaths',
+                                                                       'Recovered'])
             else:
                 df[df['Country/Region'] == self.asked_country].plot(x='Date', y=[state])
             plt.show()
@@ -107,13 +112,28 @@ class VirusDatasetAnalyser():
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
-            msg.showinfo("Min", "Least confirmed cases:" + str(self.df[self.df.Confirmed == self.df.Confirmed.min()]['Country/Region'].to_string())+"\nLeast Deaths cases:" + str(self.df[self.df.Deaths == self.df.Deaths.min()]['Country/Region'].to_string())+"\nLeast Recovered cases:" + str(self.df[self.df.Recovered == self.df.Recovered.min()]['Country/Region'].to_string()))
+            msg.showinfo("Min",
+                         "Least confirmed cases:"+
+                         str(self.df[self.df.Confirmed == self.df.Confirmed.min()]
+                             ['Country/Region'].to_string())+
+                         "\nLeast Deaths cases:" +
+                         str(self.df[self.df.Deaths == self.df.Deaths.min()]
+                             ['Country/Region'].to_string())+
+                         "\nLeast Recovered cases:"+
+                         str(self.df[self.df.Recovered == self.df.Recovered.min()]
+                             ['Country/Region'].to_string()))
     def maxcases(self):
         """ shows name the most confirmed/Deaths/Recoverd countries"""
         if self.filename == "":
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
-            msg.showinfo("Max", "Most confirmed cases:" + str(self.df[self.df.Confirmed == self.df.Confirmed.max()]['Country/Region'].to_string())+"\nMost Deaths cases:" + str(self.df[self.df.Deaths == self.df.Deaths.max()]['Country/Region'].to_string())+"\nMost Recovered cases:" + str(self.df[self.df.Recovered == self.df.Recovered.max()]['Country/Region'].to_string()))
+            msg.showinfo("Max",
+                         "Most confirmed cases:"+
+                         str(self.df[self.df.Confirmed == self.df.Confirmed.max()]['Country/Region'].to_string())+
+                         "\nMost Deaths cases:"+
+                         str(self.df[self.df.Deaths == self.df.Deaths.max()]['Country/Region'].to_string())+
+                         "\nMost Recovered cases:"+
+                         str(self.df[self.df.Recovered == self.df.Recovered.max()]['Country/Region'].to_string()))
     def closefile(self):
         """ closes the csv file """
         if self.filename == "":
@@ -149,7 +169,11 @@ class VirusDatasetAnalyser():
             plt.show()
     def check_columns(self):
         """ checks the columns name from the importrd .csv file """
-        if all([item in self.df.columns for item in ['Province/State', 'Country/Region', 'Lat', 'Long', 'Date', 'Confirmed', 'Deaths', 'Recovered']]):
+        if all([item in self.df.columns for item in ['Province/State',
+                                                     'Country/Region',
+                                                     'Lat', 'Long',
+                                                     'Date', 'Confirmed',
+                                                     'Deaths', 'Recovered']]):
             self.df.drop_duplicates(subset='Country/Region', keep='last', inplace=True)
             self.df['Country/Region'] = self.df['Country/Region'].astype("string")
             msg.showinfo("SUCCESS", "CSV FILE ADDED SUCCESSFULLY")
