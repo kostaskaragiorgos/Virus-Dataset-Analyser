@@ -102,6 +102,7 @@ class VirusDatasetAnalyser():
                                                                        'Recovered'])
             else:
                 df[df['Country/Region'] == self.asked_country].plot(x='Date', y=[state])
+                plt.title("Time seris of "+ state+" for "+self.asked_country)
             plt.show()
     def showinfdiff(self):
         """ shows the differences an infected country based on two specific dates """
