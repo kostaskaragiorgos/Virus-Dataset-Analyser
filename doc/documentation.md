@@ -114,3 +114,9 @@ Pop up
 Example
 
 <p><img src ="doc images/Graphs menu/show infected bar graph.png" title="infected bar graph example"/></p>
+
+# About menu
+
+You can show info about the app by using menu About --> About or using Ctrl+i keybind
+
+<p><img src="doc images/About menu/about menu.png" title="about menu"/></p>
