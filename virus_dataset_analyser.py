@@ -40,6 +40,12 @@ class VirusDatasetAnalyser():
         self.show_menu.add_command(label="Show number of active cases by country",
                                    accelerator='Alt+T', command=self.active_cases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
+        self.save_menu = Menu(self.menu, tearoff=0)
+        self.save_menu.add_command(label="Deaths")
+        self.save_menu.add_command(label="Confirmed")
+        self.save_menu.add_command(label="Recovered")
+        self.save_menu.add_command(label="All")
+        self.menu.add_cascade(label="Save Plots", menu=self.save_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country",
                                           accelerator='Ctrl+T', command=self.casesbycountry)
