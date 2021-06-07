@@ -41,7 +41,7 @@ class VirusDatasetAnalyser():
                                    accelerator='Alt+T', command=self.active_cases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.save_menu = Menu(self.menu, tearoff=0)
-        self.save_menu.add_command(label="Deaths")
+        self.save_menu.add_command(label="Deaths", command=self.plot)
         self.save_menu.add_command(label="Confirmed")
         self.save_menu.add_command(label="Recovered")
         self.save_menu.add_command(label="All")
@@ -187,6 +187,22 @@ class VirusDatasetAnalyser():
         else:
             self.filename = ""
             msg.showerror("ERROR", "NO PROPER CSV ")
+    
+    def splot(self, state):
+        if self.filename == "":
+            msg.showerror("ERROR", "NO FILE IMPORTED")
+        else:
+            df = pd.read_csv(self.filename)
+            self.user_input()
+            if state == 'all':
+                pass
+            elif state == "deaths":
+                pass
+            elif state == "recoverd":
+                pass
+            else:
+                pass 
+
     def file_input_validation(self):
         """ user input validation """
         if ".csv" in self.filename:
