@@ -193,24 +193,23 @@ class VirusDatasetAnalyser():
             msg.showerror("ERROR", "NO FILE IMPORTED")
         else:
             df = pd.read_csv(self.filename)
-            self.user_input()
-            indexlist = df.location.unique().tolist()
+            indexlist = df["Country/Region"].unique().tolist()
             if state == 'all':                
                 for i in indexlist:
-                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Deaths', 'Confirmed', 'Recovered'], title=str(i))
+                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Deaths', 'Confirmed', 'Recovered'], title=str(i))
                     plt.savefig("plot/all/"+str(i)+".png")
             elif state == "deaths":
                 for i in indexlist:
-                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Deaths'], title=str(i))
+                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Deaths'], title=str(i))
                     plt.savefig("plot/deaths/"+str(i)+".png")
             elif state == "recoverd":
                 for i in indexlist:
-                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Recovered'], title=str(i))
+                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Recovered'], title=str(i))
                     plt.savefig("plot/recovered/"+str(i)+".png")
             else:
                 for i in indexlist:
-                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Confirmed'], title=str(i))
-                    plt.savefig("plot/deaths/"+str(i)+".png")
+                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Confirmed'], title=str(i))
+                    plt.savefig("plot/confirmed/"+str(i)+".png")
 
     def file_input_validation(self):
         """ user input validation """
