@@ -103,6 +103,7 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-q>', lambda event: self.splot("deaths"))
         self.master.bind('<Control-w>', lambda event: self.splot("confirmed"))
         self.master.bind('<Alt-q>', lambda event: self.splot("recovered"))
+        self.master.bind('<Alt-w>', lambda event: self.splot("All"))
 
 
 
