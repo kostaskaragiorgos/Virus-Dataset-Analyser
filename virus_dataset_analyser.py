@@ -60,7 +60,7 @@ class VirusDatasetAnalyser():
         self.save_menu.add_command(label="Deaths",
                                    accelerator='Ctrl+Q', command=lambda: self.splot("deaths"))
         self.save_menu.add_command(label="Confirmed",
-                                   accelearator='Ctrl+W', command=lambda:self.splot("confirmed"))
+                                   accelerator='Ctrl+W', command=lambda:self.splot("confirmed"))
         self.save_menu.add_command(label="Recovered",
                                    accelerator='Alt+Q', command=lambda:self.splot("recovered"))
         self.save_menu.add_command(label="All",
@@ -100,6 +100,7 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
         self.master.bind('<Alt-s>', lambda event: self.showinfdiff())
+        self.master.bind('<Control-q>', lambda event: self.splot("deaths"))
 
 
 
