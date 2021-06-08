@@ -80,6 +80,25 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-F1>', lambda event: helpmenu())
         self.master.bind('<Control-i>', lambda event: aboutmenu())
         self.master.bind('<Alt-s>', lambda event: self.showinfdiff())
+
+    def saveplots(df, state, indexlist):
+        if state == 'all':
+            for i in indexlist:
+                df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Deaths', 'Confirmed', 'Recovered'], title=str(i))
+                plt.savefig("plot/all/"+str(i)+".png")
+        elif state == "deaths":
+            for i in indexlist:
+                df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Deaths'], title=str(i))
+                plt.savefig("plot/deaths/"+str(i)+".png")
+        elif state == "recoverd":
+            for i in indexlist:
+                df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Recovered'], title=str(i))
+                plt.savefig("plot/recovered/"+str(i)+".png")
+        else:
+            for i in indexlist:
+                df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Confirmed'], title=str(i))
+                plt.savefig("plot/confirmed/"+str(i)+".png")
+
     def active_cases(self):
         """ shows the number of active cases of a country """
         if self.filename == "":
@@ -194,23 +213,8 @@ class VirusDatasetAnalyser():
         else:
             df = pd.read_csv(self.filename)
             indexlist = df["Country/Region"].unique().tolist()
-            if state == 'all':                
-                for i in indexlist:
-                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Deaths', 'Confirmed', 'Recovered'], title=str(i))
-                    plt.savefig("plot/all/"+str(i)+".png")
-            elif state == "deaths":
-                for i in indexlist:
-                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Deaths'], title=str(i))
-                    plt.savefig("plot/deaths/"+str(i)+".png")
-            elif state == "recoverd":
-                for i in indexlist:
-                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Recovered'], title=str(i))
-                    plt.savefig("plot/recovered/"+str(i)+".png")
-            else:
-                for i in indexlist:
-                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Confirmed'], title=str(i))
-                    plt.savefig("plot/confirmed/"+str(i)+".png")
-
+            self.saveplots(df, state, indexlist)
+        
     def file_input_validation(self):
         """ user input validation """
         if ".csv" in self.filename:
