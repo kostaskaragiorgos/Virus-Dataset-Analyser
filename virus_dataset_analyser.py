@@ -204,7 +204,9 @@ class VirusDatasetAnalyser():
                     df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Deaths'], title=str(i))
                     plt.savefig("plot/deaths/"+str(i)+".png")
             elif state == "recoverd":
-                pass
+                for i in indexlist:
+                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Recovered'], title=str(i))
+                    plt.savefig("plot/recovered/"+str(i)+".png")
             else:
                 pass 
 
