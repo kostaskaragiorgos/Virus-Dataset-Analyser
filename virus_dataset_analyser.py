@@ -208,7 +208,9 @@ class VirusDatasetAnalyser():
                     df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Recovered'], title=str(i))
                     plt.savefig("plot/recovered/"+str(i)+".png")
             else:
-                pass 
+                for i in indexlist:
+                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Confirmed'], title=str(i))
+                    plt.savefig("plot/deaths/"+str(i)+".png")
 
     def file_input_validation(self):
         """ user input validation """
