@@ -3,6 +3,7 @@ Virus dataset analyser
 """
 from tkinter import Tk, Menu, filedialog, simpledialog
 from tkinter import messagebox as msg
+from tkinter.constants import Y
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -83,21 +84,17 @@ class VirusDatasetAnalyser():
 
     def saveplots(df, state, indexlist):
         if state == 'all':
-            for i in indexlist:
-                df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Deaths', 'Confirmed', 'Recovered'], title=str(i))
-                plt.savefig("plot/all/"+str(i)+".png")
+            y = ['Deaths', 'Confirmed', 'Recovered']
         elif state == "deaths":
-            for i in indexlist:
-                df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Deaths'], title=str(i))
-                plt.savefig("plot/deaths/"+str(i)+".png")
-        elif state == "recoverd":
-            for i in indexlist:
-                df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Recovered'], title=str(i))
-                plt.savefig("plot/recovered/"+str(i)+".png")
+            y = ['Deaths']
+        elif state == "recovered":
+            y = ['Recovered']
         else:
-            for i in indexlist:
-                df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Confirmed'], title=str(i))
-                plt.savefig("plot/confirmed/"+str(i)+".png")
+            y = ['Confirmed']
+        for i in indexlist:
+            df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=y, title=str(i))
+            plt.savefig("plot/all/"+str(i)+".png")
+
 
     def active_cases(self):
         """ shows the number of active cases of a country """
