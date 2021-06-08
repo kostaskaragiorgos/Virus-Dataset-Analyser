@@ -6,7 +6,6 @@ from tkinter import messagebox as msg
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 def helpmenu():
     """ help menu funciton """
     msg.showinfo("Help", "You can find valuable information from Kaggle's datasets about viruses")
@@ -42,10 +41,10 @@ class VirusDatasetAnalyser():
                                    accelerator='Alt+T', command=self.active_cases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.save_menu = Menu(self.menu, tearoff=0)
-        self.save_menu.add_command(label="Deaths", command=lambda: self.splot("Deaths"))
-        self.save_menu.add_command(label="Confirmed", command=lambda:self.splot("Confirmed"))
-        self.save_menu.add_command(label="Recovered", command=lambda:self.splot("Recovered"))
-        self.save_menu.add_command(label="All", command=lambda: self.splot("All"))
+        self.save_menu.add_command(label="Deaths", command=lambda: self.splot("deaths"))
+        self.save_menu.add_command(label="Confirmed", command=lambda:self.splot("confirmed"))
+        self.save_menu.add_command(label="Recovered", command=lambda:self.splot("recovered"))
+        self.save_menu.add_command(label="All", command=lambda: self.splot("all"))
         self.menu.add_cascade(label="Save Plots", menu=self.save_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country",
@@ -195,14 +194,15 @@ class VirusDatasetAnalyser():
         else:
             df = pd.read_csv(self.filename)
             self.user_input()
-            if state == 'all':
-                indexlist = df.location.unique().tolist()
+            indexlist = df.location.unique().tolist()
+            if state == 'all':                
                 for i in indexlist:
                     df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Deaths', 'Confirmed', 'Recovered'], title=str(i))
                     plt.savefig("plot/all/"+str(i)+".png")
-
             elif state == "deaths":
-                pass
+                for i in indexlist:
+                    df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='date', y=['Deaths'], title=str(i))
+                    plt.savefig("plot/deaths/"+str(i)+".png")
             elif state == "recoverd":
                 pass
             else:
