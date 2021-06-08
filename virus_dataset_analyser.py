@@ -7,6 +7,21 @@ from tkinter.constants import Y
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+
+def saveplots(df, state, indexlist):
+    """ saves plot based on state"""
+    if state == 'all':
+        y = ['Deaths', 'Confirmed', 'Recovered']
+    elif state == "deaths":
+        y = ['Deaths']
+    elif state == "recovered":
+        y = ['Recovered']
+    else:
+        y = ['Confirmed']
+    for i in indexlist:
+        df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=y, title=str(i))
+        plt.savefig("plot/all/"+str(i)+".png")
+
 def helpmenu():
     """ help menu funciton """
     msg.showinfo("Help", "You can find valuable information from Kaggle's datasets about viruses")
@@ -42,8 +57,10 @@ class VirusDatasetAnalyser():
                                    accelerator='Alt+T', command=self.active_cases)
         self.menu.add_cascade(label="Show", menu=self.show_menu)
         self.save_menu = Menu(self.menu, tearoff=0)
-        self.save_menu.add_command(label="Deaths", command=lambda: self.splot("deaths"))
-        self.save_menu.add_command(label="Confirmed", command=lambda:self.splot("confirmed"))
+        self.save_menu.add_command(label="Deaths",
+                                   accelerator='Ctrl+Q', command=lambda: self.splot("deaths"))
+        self.save_menu.add_command(label="Confirmed",
+                                   accelearator='Ctrl+W', command=lambda:self.splot("confirmed"))
         self.save_menu.add_command(label="Recovered", command=lambda:self.splot("recovered"))
         self.save_menu.add_command(label="All", command=lambda: self.splot("all"))
         self.menu.add_cascade(label="Save Plots", menu=self.save_menu)
@@ -82,18 +99,7 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-i>', lambda event: aboutmenu())
         self.master.bind('<Alt-s>', lambda event: self.showinfdiff())
 
-    def saveplots(df, state, indexlist):
-        if state == 'all':
-            y = ['Deaths', 'Confirmed', 'Recovered']
-        elif state == "deaths":
-            y = ['Deaths']
-        elif state == "recovered":
-            y = ['Recovered']
-        else:
-            y = ['Confirmed']
-        for i in indexlist:
-            df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=y, title=str(i))
-            plt.savefig("plot/all/"+str(i)+".png")
+
 
 
     def active_cases(self):
@@ -210,7 +216,7 @@ class VirusDatasetAnalyser():
         else:
             df = pd.read_csv(self.filename)
             indexlist = df["Country/Region"].unique().tolist()
-            self.saveplots(df, state, indexlist)
+            saveplots(df, state, indexlist)
         
     def file_input_validation(self):
         """ user input validation """
