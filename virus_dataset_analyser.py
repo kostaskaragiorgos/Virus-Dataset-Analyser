@@ -101,6 +101,8 @@ class VirusDatasetAnalyser():
         self.master.bind('<Control-i>', lambda event: aboutmenu())
         self.master.bind('<Alt-s>', lambda event: self.showinfdiff())
         self.master.bind('<Control-q>', lambda event: self.splot("deaths"))
+        self.master.bind('<Control-w>', lambda event: self.splot("confirmed"))
+        
 
 
 
