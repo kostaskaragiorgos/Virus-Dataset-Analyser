@@ -61,8 +61,10 @@ class VirusDatasetAnalyser():
                                    accelerator='Ctrl+Q', command=lambda: self.splot("deaths"))
         self.save_menu.add_command(label="Confirmed",
                                    accelearator='Ctrl+W', command=lambda:self.splot("confirmed"))
-        self.save_menu.add_command(label="Recovered", command=lambda:self.splot("recovered"))
-        self.save_menu.add_command(label="All", command=lambda: self.splot("all"))
+        self.save_menu.add_command(label="Recovered",
+                                   accelerator='Alt+Q', command=lambda:self.splot("recovered"))
+        self.save_menu.add_command(label="All",
+                                   accelerator='Alt+W', command=lambda: self.splot("all"))
         self.menu.add_cascade(label="Save Plots", menu=self.save_menu)
         self.cases_graph_menu = Menu(self.menu, tearoff=0)
         self.cases_graph_menu.add_command(label="Show cases by country",
