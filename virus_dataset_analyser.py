@@ -12,14 +12,18 @@ def saveplots(df, state, indexlist):
     """ saves plot based on state"""
     if state == 'all':
         y = ['Deaths', 'Confirmed', 'Recovered']
+        title = "Number of Deaths, Confirmed, Recovered of "
     elif state == "deaths":
         y = ['Deaths']
+        title = "Number of Deaths of "
     elif state == "recovered":
         y = ['Recovered']
+        title="Number of Recovered of "
     else:
         y = ['Confirmed']
+        title = "Number of Confirmed of "
     for i in indexlist:
-        df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=y, title=str(i))
+        df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=y, title=title+str(i),ylabel="Number of People"  )
         plt.savefig("plot/all/"+str(i)+".png")
 
 def helpmenu():
