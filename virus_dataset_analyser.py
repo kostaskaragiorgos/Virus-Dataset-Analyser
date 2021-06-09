@@ -23,8 +23,8 @@ def saveplots(df, state, indexlist):
         y = ['Confirmed']
         title = "Number of Confirmed of "
     for i in indexlist:
-        df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=y, title=title+str(i),ylabel="Number of People"  )
-        plt.savefig("plot/all/"+str(i)+".png")
+        df[df['Country/Region'] == str(i)].plot(figsize=(15, 10), x='Date', y=y, title=title+str(i), ylabel="Number of People"  )
+        plt.savefig("plot/"+str(state)+str(i)+".png")
 
 def helpmenu():
     """ help menu funciton """
