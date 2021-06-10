@@ -11,7 +11,14 @@ Show most infected Alt + M
 Show least infected Ctrl + M
 Show infected difference Alt + S
 Show number of active cases by  country Alt + T
-=================================
+===============================================
+Save Plots
+===================
+Deaths Ctrl+Q
+Confirmed Ctrl + W
+Recoverd Alt + Q
+All Alt + W
+===================
 Graphs menu
 ===========
 Show cases by country Ctrl + T
