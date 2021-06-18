@@ -15,7 +15,14 @@ def createdataframe(filename):
     """
     return pd.read_csv(filename)
 
-
+def addtoafile(data, flag):
+    """
+    write data to a .txt file
+    Args:
+        data: data to the file save
+    """
+    with open('dailyreport.txt', flag) as f:
+        f.writelines(data)
 
 
 def main():
