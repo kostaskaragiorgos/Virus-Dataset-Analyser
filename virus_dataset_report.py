@@ -15,6 +15,16 @@ def createdataframe(filename):
     """
     return pd.read_csv(filename)
 
+def cleardataframe(dataframe):
+    """ removes the duplicate values
+    Args:
+        dataframe: a dataframe
+    Returns:
+        a modified dataframe
+    """
+    dataframe = dataframe.drop_duplicates(subset='location', keep='last')
+    return dataframe
+
 def addtoafile(data, flag):
     """
     write data to a .txt file
