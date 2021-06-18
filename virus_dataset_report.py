@@ -1,9 +1,14 @@
+import logging
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
 
 FILENAME = "test files/covid_19_clean_complete.csv"
+
+logging.basicConfig(filename='test.log', level=logging.INFO,
+                    format='%(levelname)s:%(message)s')
+logging.getLogger().addHandler(logging.StreamHandler())
 
 def createdataframe(filename):
     """
@@ -33,6 +38,8 @@ def getcasesplotforeverylocation(dataframe):
     """
     indexlist = dataframe.Country.unique().tolist()
     for i in indexlist:
+        if str(i) == "Taiwan*":
+            i = "Taiwan"
         dataframe[dataframe['Country'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Confirmed', 'Deaths', 'Recovered'], title="Cases of "+str(i))
         plt.savefig("plots/Cases of "+str(i)+".png")
 
