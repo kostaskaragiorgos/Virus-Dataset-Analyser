@@ -22,7 +22,7 @@ def cleardataframe(dataframe):
     Returns:
         a modified dataframe
     """
-    dataframe = dataframe.drop_duplicates(subset='location', keep='last')
+    dataframe = dataframe.drop_duplicates(subset='Country', keep='last')
     return dataframe
 
 def addtoafile(data, flag):
@@ -39,6 +39,7 @@ def main():
     """ main function """
     info = []
     df = createdataframe(FILENAME)
+    df = cleardataframe(df)
     print(df.head())
     os.system("pause")
 
