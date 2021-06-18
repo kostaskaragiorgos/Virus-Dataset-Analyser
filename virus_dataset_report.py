@@ -57,9 +57,10 @@ def main():
     """ main function """
     info = []
     df = createdataframe(FILENAME)
+    logging.info("dataset file has been successfully imported")
     getcasesplotforeverylocation(df)
+    logging.info("Cases plots have been successfully created")
     df = cleardataframe(df)
-    print(df.head())
     os.system("pause")
 
 if __name__ == '__main__':
