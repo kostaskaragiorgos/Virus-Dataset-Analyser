@@ -25,6 +25,17 @@ def cleardataframe(dataframe):
     dataframe = dataframe.drop_duplicates(subset='Country', keep='last')
     return dataframe
 
+def getcasesplotforeverylocation(dataframe):
+    """
+    Saves a Vaccinations plot for every location.
+    Args:
+        dataframe: a pandas dataframe
+    """
+    indexlist = dataframe.Country.unique().tolist()
+    for i in indexlist:
+        dataframe[dataframe['Country'] == str(i)].plot(figsize=(15, 10), x='Date', y=['Confirmed', 'Deaths', 'Recovered'], title="Cases of "+str(i))
+        plt.savefig("plots/Cases of "+str(i)+".png")
+
 def addtoafile(data, flag):
     """
     write data to a .txt file
@@ -39,6 +50,7 @@ def main():
     """ main function """
     info = []
     df = createdataframe(FILENAME)
+    getcasesplotforeverylocation(df)
     df = cleardataframe(df)
     print(df.head())
     os.system("pause")
