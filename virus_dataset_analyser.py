@@ -46,6 +46,7 @@ class VirusDatasetAnalyser():
                                    accelerator='Ctrl+O', command=self.insert_csv)
         self.file_menu.add_command(label="Close file",
                                    accelerator='Ctrl+F4', command=self.closefile)
+        self.file_menu.add_command(label="Save Report")
         self.file_menu.add_command(label="Exit", accelerator='Alt+F4', command=self.exitmenu)
         self.menu.add_cascade(label="File", menu=self.file_menu)
         self.show_menu = Menu(self.menu, tearoff=0)
@@ -109,7 +110,9 @@ class VirusDatasetAnalyser():
         self.master.bind('<Alt-q>', lambda event: self.splot("recovered"))
         self.master.bind('<Alt-w>', lambda event: self.splot("All"))
 
-
+    
+    def saveReport(self):
+        pass
 
 
     def active_cases(self):
